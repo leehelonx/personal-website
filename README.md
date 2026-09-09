@@ -1,18 +1,14 @@
-# personal-website
+# leehelonx 的个人主页
 
-个人网站的学习项目。
-
-## 目录
-
-- `frontend/`：浏览器中显示的页面、样式、图片和交互代码。
-- `backend/`：提供数据接口并在本地启动网站的 Node.js 服务。
+这是一个正在改造中的 Vue + Vite 个人主页。
 
 ## 本地启动
 
 ```bash
-cd backend
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
-然后在浏览器或 VS Code 的 Simple Browser 打开 `http://localhost:3000`。
+## 来源与许可
+
+本项目基于 [imsyy/home](https://github.com/imsyy/home) 改造，遵循 MIT License。原始版权与许可证文本保留在 [LICENSE](LICENSE) 中。

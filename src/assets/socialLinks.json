@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Github",
+    "icon": "images/icon/github.png",
+    "tip": "去 Github 看看",
+    "url": "https://github.com/leehelonx "
+  },
+  {
+    "name": "BiliBili",
+    "icon": "images/icon/bilibili.png",
+    "tip": "(゜-゜)つロ 干杯 ~",
+    "url": "https://space.bilibili.com/256117421"
+  },
+  {
+    "name": "Email",
+    "icon": "images/icon/email.png",
+    "tip": "来封 Email ~",
+    "url": "mailto:leehelonx@gmail.com"
+  },
+  {
+    "name": "Twitter",
+    "icon": "images/icon/twitter.png",
+    "tip": "你懂的 ~",
+    "url": "https://twitter.com/leehelonx"
+  },
+  {
+    "name": "Telegram",
+    "icon": "images/icon/telegram.png",
+    "tip": "你懂的 ~",
+    "url": "https://t.me/leehelonx"
+  }
+]

@@ -1,18 +1,39 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lee helonx｜个人网站</title>
-    <link rel="stylesheet" href="frontend/css/style.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/icon/favicon.png" />
+    <link rel="apple-touch-icon" href="images/icon/apple-touch-icon.png" />
+    <link rel="bookmark" href="images/icon/apple-touch-icon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="200x200" href="images/icon/apple-touch-icon.png" />
+    <meta name="description" content="%VITE_SITE_DES%" />
+    <meta name="keywords" content="%VITE_SITE_KEYWORDS%" />
+    <meta name="author" content="%VITE_SITE_AUTHOR%" />
+    <meta name="theme-color" content="#424242" />
+    <title>%VITE_SITE_NAME%</title>
+    <!-- HarmonyOS Sans -->
+    <!-- 本站 CDN 已开启防盗链，非本站域名不可访问，请更改链接为下方内容，否则自定义字体将失效 -->
+    <link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.imsyy.top/gh/imsyy/file/font/HarmonyOS_Sans/regular.min.css" /> -->
+    <!-- IE Out -->
+    <script>
+      if (/*@cc_on!@*/ false || (!!window.MSInputMethodContext && !!document.documentMode))
+        window.location.href =
+          'https://support.dmeng.net/upgrade-your-browser.html?referrer=' +
+          encodeURIComponent(window.location.href);
+    </script>
   </head>
+
   <body>
-    <main>
-      <img src="frontend/assets/avatar.png" alt="lee helonx 的头像">
-      <h1 id="name">lee helonx</h1>
-      <p id="bio">Welcome to my website!</p>
-      <p>Feel free to explore and learn more about me.</p>
-    </main>
-    <script src="frontend/js/main.js"></script>
+    <!-- 主体内容 -->
+    <div id="app"></div>
+    <!-- noscript -->
+    <noscript>
+      <div style="text-align: center">请开启 JavaScript</div>
+    </noscript>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
