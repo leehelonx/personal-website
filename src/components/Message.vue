@@ -37,7 +37,7 @@ import { mainStore } from "@/store";
 const store = mainStore();
 
 // 主页站点logo
-const siteLogo = import.meta.env.VITE_SITE_MAIN_LOGO;
+const siteLogo = `${import.meta.env.BASE_URL}${import.meta.env.VITE_SITE_MAIN_LOGO.replace(/^\//, "")}`;
 // 站点链接
 const siteBrand = {
   main: import.meta.env.VITE_SITE_BRAND_MAIN || "Helonx",
