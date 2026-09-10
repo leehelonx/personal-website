@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今日热榜 · Helonx</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: #fff;
+        font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+        background:
+          linear-gradient(#000000a8, #000000c7),
+          url("./images/background1.jpg") center / cover fixed;
+      }
+
+      main {
+        width: min(900px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 64px 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 42px;
+      }
+
+      .subtitle,
+      #status {
+        color: #ffffffb3;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 28px 0 20px;
+      }
+
+      button,
+      .back {
+        padding: 10px 16px;
+        border: 1px solid #ffffff33;
+        border-radius: 10px;
+        background: #00000066;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      button.active,
+      button:hover,
+      .back:hover {
+        background: #ffffff33;
+      }
+
+      #list {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 12px;
+        padding: 18px;
+        border: 1px solid #ffffff33;
+        border-radius: 14px;
+        background: #00000066;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .item:hover {
+        background: #ffffff22;
+      }
+
+      .number {
+        color: #ffffff80;
+        font-size: 18px;
+      }
+
+      .item h2 {
+        margin: 0;
+        font-size: 17px;
+      }
+
+      .item p {
+        margin: 8px 0 0;
+        color: #ffffffb3;
+        font-size: 14px;
+      }
+
+      .back {
+        display: inline-block;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>今日热榜</h1>
+      <p class="subtitle">聚合当天值得关注的内容。</p>
+
+      <div class="tabs">
+        <button class="active" data-source="bilibili">哔哩哔哩</button>
+        <button data-source="baidu">百度</button>
+        <button data-source="douyin">抖音</button>
+      </div>
+
+      <p id="status">正在加载热榜…</p>
+      <section id="list"></section>
+
+      <a class="back" href="./">← 返回首页</a>
+    </main>
+
+    <script>
+      const api = "https://daily-hot-api-ruddy-ten.vercel.app";
+      const status = document.querySelector("#status");
+      const list = document.querySelector("#list");
+      const buttons = document.querySelectorAll("[data-source]");
+
+      async function loadHotList(source) {
+        status.textContent = "正在加载热榜…";
+        list.innerHTML = "";
+
+        try {
+          const response = await fetch(`${api}/${source}`);
+          const result = await response.json();
+
+          if (result.code !== 200) {
+            throw new Error(result.message || "接口暂时不可用");
+          }
+
+          status.textContent = `${result.title} · ${result.type}`;
+
+          result.data.forEach((item, index) => {
+            const card = document.createElement("a");
+            card.className = "item";
+            card.href = item.url || item.mobileUrl || "#";
+
+            const number = document.createElement("span");
+            number.className = "number";
+            number.textContent = index + 1;
+
+            const content = document.createElement("div");
+            const title = document.createElement("h2");
+            title.textContent = item.title;
+
+            const detail = document.createElement("p");
+            detail.textContent = item.author || item.hot || item.desc || "";
+
+            content.append(title, detail);
+            card.append(number, content);
+            list.append(card);
+          });
+        } catch (error) {
+          status.textContent = `加载失败：${error.message}`;
+        }
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          buttons.forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
+          loadHotList(button.dataset.source);
+        });
+      });
+
+      loadHotList("bilibili");
+    </script>
+  </body>
+</html>

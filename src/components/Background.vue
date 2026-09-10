@@ -15,7 +15,6 @@
         v-if="store.backgroundShow && store.coverType != '3'"
         class="down"
         :href="bgUrl"
-        target="_blank"
       >
         下载壁纸
       </a>

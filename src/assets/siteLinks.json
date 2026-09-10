@@ -18,21 +18,21 @@
   {
     "icon": "Compass",
     "name": "起始页",
-    "link": "https://github.com/leehelonx"
+    "link": "coming-soon.html"
   },
   {
     "icon": "Book",
     "name": "网址集",
-    "link": "https://github.com/leehelonx"
+    "link": "links.html"
   },
   {
     "icon": "Fire",
     "name": "今日热榜",
-    "link": "https://github.com/leehelonx"
+    "link": "hot.html"
   },
   {
     "icon": "LaptopCode",
     "name": "站点监测",
-    "link": "https://github.com/leehelonx"
+    "link": "https://stats.uptimerobot.com/2PHVOeNN8Y"
   }
 ]

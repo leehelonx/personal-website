@@ -77,7 +77,7 @@ const jumpLink = (data) => {
   if (data.action === "player" && store.musicClick) { 
     if (typeof $openList === "function") $openList();
   } else {
-    window.open(data.link, "_blank");
+    window.location.href = data.link;
   }
 };
 

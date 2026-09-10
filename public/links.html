@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网址集 · Helonx</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: #fff;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Microsoft YaHei",
+          sans-serif;
+        background:
+          linear-gradient(#000000a8, #000000c7),
+          url("./images/background1.jpg") center / cover fixed;
+      }
+
+      main {
+        width: min(900px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 80px 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 42px;
+      }
+
+      .subtitle {
+        margin: 12px 0 36px;
+        color: #ffffffb3;
+      }
+
+      .empty {
+        padding: 40px;
+        border: 1px solid #ffffff33;
+        border-radius: 16px;
+        background: #00000066;
+        text-align: center;
+        color: #ffffffb3;
+      }
+
+      .group h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+      }
+
+      .link-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 20px;
+        border: 1px solid #ffffff33;
+        border-radius: 14px;
+        background: #00000066;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.2s;
+      }
+
+      .link-card:hover {
+        transform: translateY(-3px);
+        background: #ffffff22;
+      }
+
+      .back {
+        display: inline-block;
+        margin-top: 32px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: #ffffff1a;
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>网址集</h1>
+      <p class="subtitle">收集常用、值得保存的网站。</p>
+
+      <section class="group">
+        <h2>常用搜索</h2>
+        <a
+          class="link-card"
+          href="https://www.google.com"
+        >
+          <span>Google</span>
+          <span>Google 搜索</span>
+        </a>
+        <!-- 添加示例 -->
+        <!-- <a class="link-card"
+            href="网址"
+          <span>名称</span>
+          <span>说明</span>
+        </a> -->
+      </section>
+
+      <a class="back" href="./">← 返回首页</a>
+    </main>
+  </body>
+</html>
