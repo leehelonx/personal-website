@@ -88,7 +88,7 @@ watch(
     flex-direction: row;
     align-items: center;
     animation: fade 0.5s;
-    max-width: 460px;
+    max-width: 520px;
     .logo-img {
       border-radius: 50%;
       width: 120px;

@@ -14,19 +14,19 @@
           <a :href="siteUrl">{{ siteAuthor }}</a>
         </span>
         <!-- 以下信息请不要修改哦 -->
-        <span class="hidden">
+        <!-- <span class="hidden">
           &amp;&nbsp;Made&nbsp;by
           <a :href="config.github" target="_blank">
             {{ config.author }}
           </a>
-        </span>
+        </span> -->
         <!-- 站点备案 -->
-        <span>
+        <!-- <span>
           &amp;
           <a v-if="siteIcp" href="https://beian.miit.gov.cn" target="_blank">
             {{ siteIcp }}
           </a>
-        </span>
+        </span> -->
       </div>
       <div v-else class="lrc">
         <Transition name="fade" mode="out-in">
@@ -44,7 +44,7 @@
 <script setup>
 import { MusicOne } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
-import config from "@/../package.json";
+// import config from "@/../package.json";   备案号相关
 
 const store = mainStore();
 const fullYear = new Date().getFullYear();
@@ -55,7 +55,7 @@ const startYear = ref(
   import.meta.env.VITE_SITE_START?.length >= 4 ? 
   import.meta.env.VITE_SITE_START.substring(0, 4) : null
 );
-const siteIcp = ref(import.meta.env.VITE_SITE_ICP);
+// const siteIcp = ref(import.meta.env.VITE_SITE_ICP);  备案号相关
 const siteAuthor = ref(import.meta.env.VITE_SITE_AUTHOR);
 const siteUrl = computed(() => {
   const url = import.meta.env.VITE_SITE_URL;

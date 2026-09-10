@@ -1,45 +1,13 @@
 <template>
   <!-- 音乐控制面板 -->
-  <div
-    class="music"
-    @mouseenter="volumeShow = true"
-    @mouseleave="volumeShow = false"
-    v-show="store.musicOpenState"
-  >
+  <div class="music" v-show="store.musicOpenState">
     <div class="btns">
       <span @click="openMusicList()">音乐列表</span>
       <span @click="store.musicOpenState = false">回到一言</span>
     </div>
-    <div class="control">
-      <go-start theme="filled" size="30" fill="#efefef" @click="changeMusicIndex(0)" />
-      <Transition name="fade" mode="out-in">
-        <div :key="store.playerState" class="state" @click="changePlayState">
-          <play-one theme="filled" size="50" fill="#efefef" v-show="!store.playerState" />
-          <pause theme="filled" size="50" fill="#efefef" v-show="store.playerState" />
-        </div>
-      </Transition>
-      <go-end theme="filled" size="30" fill="#efefef" @click="changeMusicIndex(1)" />
-    </div>
     <div class="menu">
-      <div class="name" v-show="!volumeShow">
-        <span>{{
-          store.getPlayerData.name
-            ? store.getPlayerData.name + " - " + store.getPlayerData.artist
-            : "未播放音乐"
-        }}</span>
-      </div>
-      <div class="volume" v-show="volumeShow">
-        <div class="icon">
-          <volume-mute theme="filled" size="24" fill="#efefef" v-if="volumeNum == 0" />
-          <volume-small
-            theme="filled"
-            size="24"
-            fill="#efefef"
-            v-else-if="volumeNum > 0 && volumeNum < 0.7"
-          />
-          <volume-notice theme="filled" size="24" fill="#efefef" v-else />
-        </div>
-        <el-slider v-model="volumeNum" :show-tooltip="false" :min="0" :max="1" :step="0.01" />
+      <div class="name">
+        <span>请在网易云播放器中播放和切歌</span>
       </div>
     </div>
   </div>
@@ -55,12 +23,11 @@
             fill="#ffffff60"
             @click="closeMusicList()"
           />
-          <Player
-            ref="playerRef"
-            :songServer="playerData.server"
-            :songType="playerData.type"
-            :songId="playerData.id"
-            :volume="volumeNum"
+          <iframe
+            class="netease-player"
+            :src="neteasePlayerUrl"
+            title="网易云音乐播放器"
+            frameborder="0"
           />
         </div>
       </Transition>
@@ -69,77 +36,26 @@
 </template>
 
 <script setup>
-import {
-  GoStart,
-  PlayOne,
-  Pause,
-  GoEnd,
-  CloseOne,
-  VolumeMute,
-  VolumeSmall,
-  VolumeNotice,
-} from "@icon-park/vue-next";
-import Player from "@/components/Player.vue";
+import { CloseOne } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 const store = mainStore();
 
-// 音量条数据
-const volumeShow = ref(false);
-const volumeNum = ref(store.musicVolume ? store.musicVolume : 0.7);
-
-// 播放列表数据
 const musicListShow = ref(false);
-const playerRef = ref(null);
-const playerData = reactive({
-  server: import.meta.env.VITE_SONG_SERVER,
-  type: import.meta.env.VITE_SONG_TYPE,
-  id: import.meta.env.VITE_SONG_ID,
-});
+const neteasePlayerUrl = `https://music.163.com/outchain/player?type=0&id=${import.meta.env.VITE_SONG_ID}&auto=0&height=430`;
 
 // 开启播放列表
 const openMusicList = () => {
   musicListShow.value = true;
-  playerRef.value.toggleList();
 };
 
 // 关闭播放列表
 const closeMusicList = () => {
   musicListShow.value = false;
-  playerRef.value.toggleList();
-};
-
-// 音乐播放暂停
-const changePlayState = () => {
-  playerRef.value.playToggle();
-};
-
-// 音乐上下曲
-const changeMusicIndex = (type) => {
-  playerRef.value.changeSong(type);
 };
 
 onMounted(() => {
-  // 空格键事件
-  window.addEventListener("keydown", (e) => {
-    if (!store.musicIsOk) {
-      return;
-    }
-    if (e.code == "Space") {
-      changePlayState();
-    }
-  });
-  // 挂载方法至 window
   window.$openList = openMusicList;
 });
-
-// 监听音量变化
-watch(
-  () => volumeNum.value,
-  (value) => {
-    store.musicVolume = value;
-    playerRef.value.changeVolume(store.musicVolume);
-  },
-);
 </script>
 
 <style lang="scss" scoped>
@@ -172,37 +88,6 @@ watch(
       }
     }
   }
-  .control {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    .state {
-      transition: opacity 0.1s;
-      .i-icon {
-        width: 50px;
-        height: 50px;
-        display: block;
-      }
-    }
-    .i-icon {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      border-radius: 6px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      transform: scale(1);
-      &:hover {
-        background: #ffffff33;
-      }
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-  }
   .menu {
     height: 26px;
     width: 100%;
@@ -218,34 +103,6 @@ watch(
       overflow-x: hidden;
       white-space: nowrap;
       animation: fade 0.3s;
-    }
-    .volume {
-      width: 100%;
-      padding: 0 12px;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      animation: fade 0.3s;
-      .icon {
-        margin-right: 12px;
-        span {
-          width: 24px;
-          height: 24px;
-          display: block;
-        }
-      }
-      :deep(*) {
-        transition: none;
-      }
-      :deep(.el-slider__button) {
-        transition: 0.3s;
-      }
-      .el-slider {
-        margin-right: 12px;
-        --el-slider-main-bg-color: #efefef;
-        --el-slider-runway-bg-color: #ffffff40;
-        --el-slider-button-size: 16px;
-      }
     }
   }
 }
@@ -288,6 +145,11 @@ watch(
       &:active {
         transform: scale(0.95);
       }
+    }
+    .netease-player {
+      width: calc(100% - 40px);
+      height: 430px;
+      border: 0;
     }
   }
 }
